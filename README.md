@@ -62,3 +62,10 @@ Create a symlink of the script to your local path
 ln -sr ./git-partial-clone/git-partial-clone.sh ~/.local/bin/git-partial-clone
 git-partial-clone   # run
 ```
+
+## `bashrc-utils`: Misc aliases and functions
+Paste them in your `~/.bashrc`.
+- Stashes
+- Diffs
+- Commit logs
+- ...
