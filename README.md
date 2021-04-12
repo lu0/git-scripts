@@ -1,6 +1,12 @@
 # Git scripts
 Collection of scripts and utilities I create in my spare time to make my life easier when using git.
 
+  - [`github-now`: Create a new Github repository](#github-now-create-a-new-github-repository)
+    - [Usage](#usage)
+  - [`git-partial-clone`: Clone a subdirectory of a repository](#git-partial-clone-clone-a-subdirectory-of-a-repository)
+    - [Usage](#usage-1)
+  - [`bashrc-utils`: Misc aliases and functions](#bashrc-utils-misc-aliases-and-functions)
+
 ## `github-now`: Create a new Github repository
 This script creates a new repository on Github from the current directory.
 
