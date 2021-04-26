@@ -38,7 +38,7 @@ if [ "$( git log --oneline -1 2>/dev/null | wc -l )" -eq 0 ]
 then 
     # Prepare initial commit
     git init $PWD
-    GH_MESSAGE="Repository created and pushed with 'github-now'"
+    GH_MESSAGE="Repository created and pushed with [github-now](https://github.com/lu0/git-scripts)"
     echo $GH_MESSAGE > README-github-now.md
     git -C $PWD add .
     git -C $PWD commit -m "${GH_MESSAGE}"
