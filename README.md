@@ -5,6 +5,7 @@ Collection of scripts and utilities I create in my spare time to make my life ea
     - [Usage](#usage)
   - [`git-partial-clone`: Clone a subdirectory of a repository](#git-partial-clone-clone-a-subdirectory-of-a-repository)
     - [Usage](#usage-1)
+    - [Docker](#docker)
   - [`bashrc-utils`: Misc aliases and functions](#bashrc-utils-misc-aliases-and-functions)
 
 ## `github-now`: Create a new Github repository
