@@ -69,7 +69,7 @@ ln -sr ./git-partial-clone/git-partial-clone.sh ~/.local/bin/git-partial-clone
 git-partial-clone   # run
 ```
 
-#### Docker
+### Docker
 You can also use the available [docker image](https://hub.docker.com/r/lu0alv/git-partial-clone) in your dockerfiles.
 
 ## `bashrc-utils`: Misc aliases and functions
