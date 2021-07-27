@@ -5,6 +5,10 @@
 # Paste them in ~/.bashrc
 #
 
+is-git-repo() {
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+}
+
 # STATUS
 alias gstatus="git fetch && git status"
 alias gstatus-sub="git submodule foreach 'git status'"
@@ -21,14 +25,14 @@ alias gdiff="git diff --color"
 alias gtree="git diff-tree -p"  # diff of a commit. Usage: gtree COMMITHASH
 alias gstaged="git diff --no-ext-diff --staged"
 
-function gdiff-compare() {
+function gdiff-reorder() {
   # git diff between 2 files ignoring order of lines.
   # Usage: gdiff-reorder <path/to/file1> <path/to/file2>
   trap '' INT
   sort $1 >tmp-a
   sort $2 >tmp-b
   gdiff --no-index tmp-a tmp-b
-  rm tmp-a tmp-b
+  /bin/rm tmp-a tmp-b
 }
 
 
@@ -51,6 +55,11 @@ alias gloga="git log --graph --all --pretty=format:'%C(yellow)%h %C(red)%aD %C(c
 # logs of a file/directory. Usage: gfollow /path/of/file
 alias gfollow="git log --follow --graph --pretty=format:'%C(yellow)%h %C(red)%aD %C(cyan)%an%C(green)%d %Creset%s' -- "
 
+# Find commit whose diff contains regex
+function glog-find() {
+  git log --pickaxe-regex -p --color-words -S"$*" # $* regex or string to find
+}
+
 
 # USER SPECIFIED IN THE CURRENT DIRECTORY
 alias guser="git config user.name; git config user.email"
@@ -64,10 +73,10 @@ alias gamend="git commit --amend --no-edit"     # Usage: gamend
 
 # FILES
 # List tracked files. Usage: glist-tracked /path/to/subdir
-alias glist-tracked="git ls-tree -r --abbrev=8 --name-only $(git branch --show-current)" # list tracked files
+alias glist-tracked="git ls-tree -r --abbrev=8 --name-only $(is-git-repo && git branch --show-current)"
 
 # List untracked files. Usage: glist-untracked /path/to/subdir
-alias glist-untracked="git ls-files --others --exclude-standard"                         # list untracked files
+alias glist-untracked="git ls-files --others --exclude-standard"
 
 # Ignore all untracked files
 alias gignoreall="git ls-files --others --exclude-standard >> .gitignore"
