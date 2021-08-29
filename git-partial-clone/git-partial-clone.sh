@@ -9,10 +9,14 @@
 #   https://github.com/lu0/git-scripts
 #
 # USAGE:
-# (1) ln -sr ./git-partial-clone.sh ~/.local/bin/git-partial-clone
-#     cp ./git-partial-clone.conf ~/.git-partial-clone.conf
-# (2) # Fill ~/.git-partial-clone.conf
-# (3) git-partial-clone
+# (1) You'll need to generate a token, password authentication is deprecated.
+#     https://github.com/settings/tokens
+#     or
+#     https://gitlab.com/-/profile/personal_access_tokens
+#     Save your token in a file named ".github-token" or ".gitlab-token"
+#     in your home directory
+# (3) Fill the config file (git-partial-clone.conf)
+# (4) ./git-partial-clone.sh
 #
 
 notif() {
@@ -22,18 +26,22 @@ notif() {
     printf "\n"$STATUS"${GPC_MSG}\n" && printf ${n}
 }
 
-source ~/.git-partial-clone.conf
+source ${PWD}/git-partial-clone.conf
+[[ -z ${GIT_REMOTE} || -z ${REPO_NAME} || -z ${GIT_REPO_USER} || -z ${PARTIAL_PATH} ]] \
+    && echo "Bad config variables" && exit
+
+[ $TOKEN_PATH ] && GIT_TOKEN=$(cat ${TOKEN_PATH}) && echo "Found a token!"
 
 [ $PARENT_PATH ] || PARENT_PATH=${PWD}
-[ ! -d ${PARENT_PATH} ] && notif e "Parent path does not exist" && exit
+[ ! -d ${PARENT_PATH} ] && notif e "Not a valid path to use as parent folder. Aborted." && exit
 [[ "${PARENT_PATH}" == */ ]] && PARENT_PATH="${PARENT_PATH: : -1}"
 GIT_CLONE_DIR=${PARENT_PATH}/${REPO_NAME}
 
 if [ ! -d ${GIT_CLONE_DIR}/.git/ ]; then 
     git init ${GIT_CLONE_DIR}
     GIT_URL=${GIT_REMOTE}.com/${GIT_REPO_USER}/${REPO_NAME}
-    git -C ${GIT_CLONE_DIR} remote add origin https://${GIT_REPO_USER}:${GIT_PWD}@${GIT_URL}.git
-    export GIT_PWD=
+    git -C ${GIT_CLONE_DIR} remote add origin https://${GIT_REPO_USER}:${GIT_TOKEN}@${GIT_URL}.git
+    export GIT_TOKEN=
 
     # Enable partial clone
     git -C ${GIT_CLONE_DIR} config --local extensions.partialClone origin

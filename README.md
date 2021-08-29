@@ -33,7 +33,7 @@ This scripts clones a subdirectory of a github/gitlab repository.
 
 ### Usage
 
-Fill the config file and locate it in `~/.git-partial-clone.conf`.
+Fill the config file (`git-partial-clone.conf`).
 ```zsh
 # Example of the git-partial-clone configuration file
 
@@ -46,11 +46,11 @@ REPO_NAME=git-scripts
 # Repository owner
 GIT_REPO_USER=lu0
 
-# If the repo is private
 # Path to the github-token or gitlab-token file
 # Configure in: https://github.com/settings/tokens
 #               https://gitlab.com/-/profile/personal_access_tokens
-GIT_PWD=
+# Leave it blank if the repo is public.
+TOKEN_PATH=
 
 # Child directory to be cloned
 PARTIAL_PATH=/github-now/assets/
@@ -61,17 +61,19 @@ PARENT_PATH=
 
 # Branch
 # Leave it blank to pull all branches
-BRANCH=master
+BRANCH=
 ```
 
-Create a symlink of the script to your local path
+Run the script
 ```zsh
-ln -sr ./git-partial-clone/git-partial-clone.sh ~/.local/bin/git-partial-clone
-git-partial-clone   # run
+cd git-partial-clone
+./git-partial-clone.sh
 ```
 
 ### Docker
 You can also use the available [docker image](https://hub.docker.com/r/lu0alv/git-partial-clone) in your dockerfiles.
+
+*Note:* The dockerfile is not *THAT* documented yet.
 
 ## `bashrc-utils`: Misc aliases and functions
 Paste them in your `~/.bashrc`.
