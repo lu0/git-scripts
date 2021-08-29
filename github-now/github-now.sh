@@ -9,7 +9,7 @@
 #   https://github.com/lu0/git-scripts
 #
 # USAGE:
-# (1) # You'll need to generate a token, password authentication is deprecated.
+# (1) You'll need to generate a token, password authentication is deprecated.
 #     https://github.com/settings/tokens
 #     Save your token in a file named ".github-token" in your home directory
 #
@@ -29,7 +29,7 @@ read -p "IS PRIVATE? [y/n]: " PRIVATE_ANS
 PRIVACY=PUBLIC && IS_PRIVATE=false
 [ "$PRIVATE_ANS" == "y" ] && PRIVACY=PRIVATE && IS_PRIVATE=true
 
-echo -e "\nAfter this operation, { $REPONAME } will be pushed to Github as a { $PRIVACY } repository for { $GITUSER }"
+echo -e "\nAfter this operation, { ${REPONAME} } will be pushed to Github as a { $PRIVACY } repository for { ${GITUSER} }"
 read -p "Continue? [y/n] " CONTINUE
 
 [ "$CONTINUE" != "y" ] && echo "Operation cancelled :(" && exit
@@ -46,8 +46,8 @@ fi
 
 TOKEN=$(cat ~/.github-token)
 
-curl -s -u $GITUSER:$TOKEN https://api.github.com/user/repos -d \
-    "{\"name\": \"$REPONAME\", \"description\": \"${DESCRIPTION}\", \"private\": $IS_PRIVATE}" > /dev/null
+curl -s -u ${GITUSER}:${TOKEN} https://api.github.com/user/repos -d \
+    "{\"name\": \"${REPONAME}\", \"description\": \"${DESCRIPTION}\", \"private\": $IS_PRIVATE}" #> /dev/null
 
-git remote add origin https://github.com/$GITUSER/$REPONAME.git
+git remote add origin https://${GITUSER}:${TOKEN}@github.com/${GITUSER}/${REPONAME}.git
 git push origin master
