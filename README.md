@@ -1,14 +1,14 @@
 # Git scripts
 Collection of scripts and utilities I create in my spare time to make my life easier when using git.
 
-  - [`github-now`: Create a new Github repository](#github-now-create-a-new-github-repository)
+  - [`github-now`: Create a Github repository from the CLI](#github-now-create-a-new-github-repository)
     - [Usage](#usage)
   - [`git-partial-clone`: Clone a subdirectory of a repository](#git-partial-clone-clone-a-subdirectory-of-a-repository)
     - [Usage](#usage-1)
     - [Docker](#docker)
   - [`bashrc-utils`: Misc aliases and functions](#bashrc-utils-misc-aliases-and-functions)
 
-## `github-now`: Create a new Github repository
+## `github-now`: Create a Github repository from the CLI
 This script creates and pushes a new repository on Github from the current directory using the command line.
 
 You'll need to [generate an access token](https://github.com/settings/tokens), as password authentication is deprecated. Save your token in `~/.github-token`.
@@ -46,7 +46,7 @@ Example
 ```zsh
 git-partial-clone --owner=lu0 --repo=vscode-settings --subdir=json/snippets
 ```
-See the entire list of options and usage on the project's [README](git-partial-clone/README.md).
+See the entire list of options and usage on the [git-partial-clone](https://github.com/lu0/git-partial-clone) repository.
 
 ### Docker
 You can also use the available [docker image](https://hub.docker.com/r/lu0alv/git-partial-clone) in your dockerfiles.
