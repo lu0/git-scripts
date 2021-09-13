@@ -16,12 +16,14 @@
 # (2) ln -sr ./github-now.sh ~/.local/bin/github-now
 #
 
+# Abort if the repo has a remote
 REMOTE="$(git config --get remote.origin.url)"
 [ -n "$(git ls-remote 2>/dev/null)" ] && echo "Remote origin already exists in" ${REMOTE} && exit
 
 REPONAME=${PWD##*/}
 GITUSER=$(git config user.name)
 
+# Prompt for user input
 echo -e "\nNAME OF REPOSITORY: ${REPONAME}"
 read -p "PROVIDE A DESCRIPTION: " DESCRIPTION
 read -p "IS PRIVATE? [y/n]: " PRIVATE_ANS
@@ -34,20 +36,26 @@ read -p "Continue? [y/n] " CONTINUE
 
 [ "$CONTINUE" != "y" ] && echo "Operation cancelled :(" && exit
 
+# Continue
 if [ "$( git log --oneline -1 2>/dev/null | wc -l )" -eq 0 ]
 then 
     # Prepare initial commit
     git init $PWD
-    GH_MESSAGE="Repository created and pushed with [github-now](https://github.com/lu0/git-scripts)"
+    GH_MESSAGE="Repository created and pushed with github-now."
     echo $GH_MESSAGE > README-github-now.md
+    echo "https://github.com/lu0/git-scripts" >> README-github-now.md
     git -C $PWD add .
     git -C $PWD commit -m "${GH_MESSAGE}"
 fi
 
 TOKEN=$(cat ~/.github-token)
 
-curl -s -u ${GITUSER}:${TOKEN} https://api.github.com/user/repos -d \
-    "{\"name\": \"${REPONAME}\", \"description\": \"${DESCRIPTION}\", \"private\": $IS_PRIVATE}" #> /dev/null
+# Create the github repository
+curl -s -o /dev/null -S -u ${GITUSER}:${TOKEN} https://api.github.com/user/repos -d \
+    "{\"name\": \"${REPONAME}\", \"description\": \"${DESCRIPTION}\", \"private\": $IS_PRIVATE}"
 
-git remote add origin https://${GITUSER}:${TOKEN}@github.com/${GITUSER}/${REPONAME}.git
-git push origin master
+# Push to the repository
+git remote add origin https://${GITUSER}:${TOKEN}@github.com/${GITUSER}/${REPONAME}.git \
+    && git push origin master \
+    || echo -e "\nError :("
+ 
