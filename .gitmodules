@@ -2,3 +2,9 @@
 	path = git-partial-clone
 	url = git@github.com:lu0/git-partial-clone.git
 
+[submodule "git-worktree-airflow"]
+	path = git-worktree-airflow
+	url = git@github.com:lu0/git-worktree-airflow.git
+[submodule "git-worktree-wrapper"]
+	path = git-worktree-wrapper
+	url = git@github.com:lu0/git-worktree-wrapper.git

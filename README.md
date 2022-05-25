@@ -1,12 +1,21 @@
 # Git scripts
 Collection of scripts and utilities I create in my spare time to make my life easier when using git.
 
+  - [`git-worktree-wrapper`: Manage worktrees faster and easily](#git-worktree-wrapper-manage-worktrees-faster-and-easily)
+  - [`git-worktree-airflow`: Manage Airflow DAGs within bare repositories](#git-worktree-airflow-manage-airflow-dags-within-bare-repositories)
   - [`github-now`: Create a Github repository from the CLI](#github-now-create-a-new-github-repository)
     - [Usage](#usage)
   - [`git-partial-clone`: Clone a subdirectory of a repository](#git-partial-clone-clone-a-subdirectory-of-a-repository)
     - [Usage](#usage-1)
     - [Docker](#docker)
   - [`bashrc-utils`: Misc aliases and functions](#bashrc-utils-misc-aliases-and-functions)
+
+## `git-workgtree-wrapper`: Manage worktrees faster and easily
+Wrapper around `git-worktree` that lets you easily create, switch and delete worktrees of bare repositories by using commands you already know: `git checkout` and `git branch`.
+
+## `git-worktree-airflow`: Manage Airflow DAGs within bare repositories
+Post-checkout hook script that lets Airflow now the worktree of DAGs to load when the `dags_folder`is pointing to a bare repository.
+
 
 ## `github-now`: Create a Github repository from the CLI
 This script creates and pushes a new repository on Github from the current directory using the command line.
