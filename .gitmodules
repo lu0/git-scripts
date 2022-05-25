@@ -1,3 +1,4 @@
 [submodule "git-partial-clone"]
 	path = git-partial-clone
-	url = https://github.com/lu0/git-partial-clone.git
+	url = git@github.com:lu0/git-partial-clone.git
+
