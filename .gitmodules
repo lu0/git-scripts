@@ -1,15 +1,15 @@
 [submodule "git-partial-clone"]
 	path = git-partial-clone
-	url = git@github.com:lu0/git-partial-clone.git
+	url = https://github.com/lu0/git-partial-clone.git
 	branch = master
 
 [submodule "git-worktree-airflow"]
 	path = git-worktree-airflow
-	url = git@github.com:lu0/git-worktree-airflow.git
+	url = https://github.com/lu0/git-worktree-airflow.git
 	branch = master
 
 [submodule "git-worktree-wrapper"]
 	path = git-worktree-wrapper
-	url = git@github.com:lu0/git-worktree-wrapper.git
-	branch = master
+	url = https://github.com/lu0/git-worktree-wrapper.git
+ 	branch = master
 
